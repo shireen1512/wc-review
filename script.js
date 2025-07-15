@@ -1,4 +1,4 @@
-const API_URL = 'https://script.google.com/macros/s/AKfycbxn6bp9YCdpCjW9gvqWnOkVOLvJcc1BxWB_5w1r9lGP9iDRRJCLy2nUmTkHiC2BSfuUfQ/exec';
+const API_URL = 'https://script.google.com/macros/s/AKfycby_CZZ8cXUdUuMl2Vgt5Y41KNCqyDxllI_Lro8f0mcKW5LeQlkC9ExR4R_UAX7M3QWrIw/exec';
 
 function loadReviews() {
   fetch(API_URL)
