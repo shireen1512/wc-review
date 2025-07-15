@@ -81,7 +81,7 @@
     </div>
 
     <!-- Static Reviews -->
-     <!--
+    <!--
     <div class="review"><div class="author"> </div><div class="text">"Expérience incroyable !"</div></div>
     <div class="review"><div class="author"> </div><div class="text">"Would definitely visit again 👍"</div></div>
     <div class="review"><div class="author"> </div><div class="text">"J'ai beaucoup riz"</div></div>
@@ -93,13 +93,23 @@
     <div class="review"><div class="author"> </div><div class="text">"Ce WC a plus de style que moi💀"</div></div>
     -->
 
+    <div id="reviews-container">Loading reviews...</div>
+
     <!-- Review Submission Form -->
+    <!--
     <h3>Write Your Review</h3>
     <form action="https://formspree.io/f/mldnyzbn" method="POST">
       <textarea name="review" rows="4" placeholder="Your anonymous review..." required></textarea>
       <br>
-      <button type="submit">Submit Review</button>
+      <button type="submit">Submit</button>
     </form>
+    -->
+
+    <form id="reviewForm">
+      <input type="text" name="review" placeholder="Write your review..." required>
+      <button type="submit">Submit</button>
+    </form>
+
   </div>
 </body>
 </html>
