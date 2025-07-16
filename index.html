@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>WC - Reviews</title>
+  <title>🚽</title>
   <style>
     body {
       font-family: Roboto, Arial, sans-serif;
@@ -71,56 +71,33 @@
   </style>
 </head>
 <body>
+  <div class="container">
+    <div class="place-header">
+      <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fuxwing.com%2Fgoogle-map-icon%2F&psig=AOvVaw1cAjEkeWFCjBAJV6kh29sC&ust=1752145083147000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKir2JrPr44DFQAAAAAdAAAAABAE" alt="Google Maps">
+      <div>
+        <div class="place-name">WC</div>
+        <div class="stars">★★★★★ (5.0)</div>
+      </div>
+    </div>
 
-  <h1>🚽</h1>
+    <!-- Static Reviews -->
+    <div class="review"><div class="author"> </div><div class="text">"Expérience incroyable !"</div></div>
+    <div class="review"><div class="author"> </div><div class="text">"Would definitely visit again 👍"</div></div>
+    <div class="review"><div class="author"> </div><div class="text">"J'ai beaucoup riz"</div></div>
+    <div class="review"><div class="author"> </div><div class="text">"Endlessly inventive"</div></div>
+    <div class="review"><div class="author"> </div><div class="text">"Je suis entrée pour les toilettes. Je suis ressortie changée. Littéralement."</div></div>
+    <div class="review"><div class="author"> </div><div class="text">"La manager du WC était tellement sympa que j’ai presque oublié qu'elle m'avait kidnappé."</div></div>
+    <div class="review"><div class="author"> </div><div class="text">"Ce WC est plus clean que mon historique de recherche"</div></div>
+    <div class="review"><div class="author"> </div><div class="text">"Ce WC a plus de caractère que mon ex"</div></div>
+    <div class="review"><div class="author"> </div><div class="text">"Ce WC a plus de style que moi💀"</div></div>
 
-  <form id="reviewForm">
-    <textarea id="reviewText" placeholder="Write your review..." required></textarea>
-    <br>
-    <button type="submit">Submit Review</button>
-  </form>
-
-  <div id="reviewsContainer">Loading reviews...</div>
-
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/9.24.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.24.0/firebase-database-compat.js"></script>
-
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyBdE_hnc1wr1Wsr4AVY8JA1QJMfubhxbF8",
-      authDomain: "wc-review.firebaseapp.com",
-      projectId: "wc-review",
-      storageBucket: "wc-review.firebasestorage.app",
-      messagingSenderId: "591044471319",
-      appId: "1:591044471319:web:1902d24b8a74c792ff0a52",
-      measurementId: "G-GW44M1FRZS"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
-
-    // Submit Review
-    document.getElementById("reviewForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      const text = document.getElementById("reviewText").value.trim();
-      if (text) {
-        db.ref("reviews").push({ text });
-        document.getElementById("reviewText").value = "";
-      }
-    });
-
-    // Load Reviews
-    const reviewsContainer = document.getElementById("reviewsContainer");
-    db.ref("reviews").on("value", function(snapshot) {
-      reviewsContainer.innerHTML = "";
-      snapshot.forEach(child => {
-        const div = document.createElement("div");
-        div.className = "review";
-        div.innerHTML = `<div class="author"></div><div class="text">"${child.val().text}"</div>`;
-        reviewsContainer.prepend(div);
-      });
-    });
-  </script>
+    <!-- Review Submission Form -->
+    <h3>Write Your Review</h3>
+    <form action="https://formspree.io/f/mldnyzbn" method="POST">
+      <textarea name="review" rows="4" placeholder="Your anonymous review..." required></textarea>
+      <br>
+      <button type="submit">Submit Review</button>
+    </form>
+  </div>
 </body>
 </html>
