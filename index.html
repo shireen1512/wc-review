@@ -143,7 +143,8 @@
       reviewElement.innerHTML = `
         <div class="text">${review.text}</div>
       `;
-      document.getElementById('reviewsContainer').prepend(reviewElement);
+      // Changed from prepend to append to show newest at the bottom
+      document.getElementById('reviewsContainer').appendChild(reviewElement);
     });
   </script>
 </body>
