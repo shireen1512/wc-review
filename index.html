@@ -25,6 +25,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      margin-bottom: 20px;
     }
     .place-header img {
       width: 40px;
@@ -34,21 +35,14 @@
       font-size: 24px;
       font-weight: bold;
     }
-    .stars {
-      color: #fbbc04;
-      font-size: 20px;
-    }
     .review {
       margin-top: 20px;
       border-bottom: 1px solid #ddd;
       padding-bottom: 15px;
     }
-    .author {
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
     .text {
       font-size: 16px;
+      line-height: 1.5;
     }
     form {
       margin-top: 30px;
@@ -58,21 +52,20 @@
       padding: 10px;
       font-size: 14px;
       resize: vertical;
+      margin-bottom: 10px;
+      font-family: inherit;
     }
     button {
-      margin-top: 10px;
       padding: 10px 20px;
       background: #34a853;
       color: white;
       border: none;
       cursor: pointer;
       border-radius: 4px;
+      font-size: 16px;
     }
     button:hover {
       background: #2c8a3e;
-    }
-    .rating {
-      margin-bottom: 10px;
     }
   </style>
 </head>
@@ -81,7 +74,6 @@
     <div class="place-header">
       <div>
         <div class="place-name">🚽</div>
-        <div class="stars">★★★★★ (5.0)</div>
       </div>
     </div>
 
@@ -93,26 +85,13 @@
     <!-- Review Submission Form -->
     <h3>Add Your Review</h3>
     <form id="reviewForm">
-      <input type="text" id="authorName" placeholder="Your Name (optional)" style="width: 100%; padding: 8px; margin-bottom: 10px;">
-      <textarea id="reviewText" rows="4" placeholder="Write Your Review" required></textarea>
-      <div class="rating">
-        <span>Rating: </span>
-        <select id="rating" required>
-          <option value="">Select rating</option>
-          <option value="5">★★★★★</option>
-          <option value="4">★★★★☆</option>
-          <option value="3">★★★☆☆</option>
-          <option value="2">★★☆☆☆</option>
-          <option value="1">★☆☆☆☆</option>
-        </select>
-      </div>
-      <br>
-      <button type="submit">Submit</button>
+      <textarea id="reviewText" rows="4" placeholder="Write your anonymous review..." required></textarea>
+      <button type="submit">Submit Review</button>
     </form>
   </div>
 
   <script>
-    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    // Firebase configuration
     const firebaseConfig = {
       apiKey: "AIzaSyBdE_hnc1wr1Wsr4AVY8JA1QJMfubhxbF8",
       authDomain: "wc-review.firebaseapp.com",
@@ -133,24 +112,19 @@
     document.getElementById('reviewForm').addEventListener('submit', function(e) {
       e.preventDefault();
       
-      const author = document.getElementById('authorName').value.trim() || 'Anonymous';
       const text = document.getElementById('reviewText').value.trim();
-      const rating = document.getElementById('rating').value;
       
-      if (!text || !rating) return;
+      if (!text) return;
       
       // Push new review to Firebase
       const newReviewRef = reviewsRef.push();
       newReviewRef.set({
-        author: author,
         text: text,
-        rating: parseInt(rating),
         timestamp: firebase.database.ServerValue.TIMESTAMP
       });
       
       // Clear form
       document.getElementById('reviewText').value = '';
-      document.getElementById('rating').value = '';
     });
 
     // Listen for new reviews
@@ -159,37 +133,9 @@
       const reviewElement = document.createElement('div');
       reviewElement.className = 'review';
       reviewElement.innerHTML = `
-        <div class="author">${review.author}</div>
-        <div class="stars">${'★'.repeat(review.rating)}${'☆'.repeat(5 - review.rating)}</div>
         <div class="text">${review.text}</div>
       `;
       document.getElementById('reviewsContainer').prepend(reviewElement);
-      
-      // Update average rating
-      updateAverageRating();
-    });
-
-    // Calculate and update average rating
-    function updateAverageRating() {
-      reviewsRef.once('value', function(snapshot) {
-        let total = 0;
-        let count = 0;
-        
-        snapshot.forEach(function(childSnapshot) {
-          total += childSnapshot.val().rating;
-          count++;
-        });
-        
-        if (count > 0) {
-          const average = (total / count).toFixed(1);
-          document.getElementById('averageRating').textContent = `(${average})`;
-        }
-      });
-    }
-
-    // Initial load of reviews
-    window.addEventListener('load', function() {
-      updateAverageRating();
     });
   </script>
 </body>
