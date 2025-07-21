@@ -1,7 +1,7 @@
-
+This is a fun personal project. ignore this if you're here from linkedin or something 💀🙏
 ## Notes
 - Integrated Firebase Realtime Database for real-time reviews.
-- Review system simplified: only anonymous text reviews, no name or rating. (if needed, revoke to 'firebase integration ws' commit)
+- Review system simplified: only anonymous text reviews, no name or rating. (if needed, revert to 'firebase integration ws' commit)
 - Reviews now appear with the newest at the bottom (appendChild).
 - User may want to temporarily hide the reviews section via HTML comments. ('Reviews Container')
 
